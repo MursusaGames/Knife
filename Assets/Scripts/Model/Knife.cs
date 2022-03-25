@@ -6,7 +6,7 @@ public class Knife : MonoBehaviour
 {
     private TouchScreenSystem touchScreenSystem;
     bool isGo;
-    float stopPoint = -12f;
+    float stopPoint = 0.5f;
     [SerializeField] float speed = 0.1f;
     void Awake()
     {
@@ -24,6 +24,7 @@ public class Knife : MonoBehaviour
         {
             Vector3 pos = transform.position;
             pos.y += speed;
+            Debug.Log(pos.y);
             if(pos.y >= stopPoint)
             {
                 isGo = false;
