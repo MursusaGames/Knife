@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa1915ac80c89649a31598e864d1ecc, type: 3}
   m_Name: OneWeek
   m_EditorClassIdentifier: 
-  _inactiveTime: 30
-  _titleMessage: 30 seconds
-  _textMessage: "\u0423\u0436\u0435 \u043F\u0440\u043E\u0448\u043B\u043E 30 \u0441\u0435\u043A\u0443\u043D\u0434."
+  _inactiveTime: 86400
+  _titleMessage: You haven't played for one day
+  _textMessage: We miss you! Come on in, it will be interesting!

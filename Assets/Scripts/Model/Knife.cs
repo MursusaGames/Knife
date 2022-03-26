@@ -5,11 +5,14 @@ using UnityEngine;
 public class Knife : MonoBehaviour
 {
     private TouchScreenSystem touchScreenSystem;
-    bool isGo;
-    float stopPoint = 0.5f;
+    public bool isGo;
+    bool stopLine;
+    private Rigidbody2D rg;
+    
     [SerializeField] float speed = 0.1f;
     void Awake()
     {
+        rg = GetComponent<Rigidbody2D>();
         touchScreenSystem = FindObjectOfType<TouchScreenSystem>();
         touchScreenSystem.GetKnife(this);
     }
@@ -22,16 +25,29 @@ public class Knife : MonoBehaviour
     {
         if (isGo)
         {
-            Vector3 pos = transform.position;
-            pos.y += speed;
-            Debug.Log(pos.y);
-            if(pos.y >= stopPoint)
+            rg.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+            if (stopLine)
             {
                 isGo = false;
+                rg.velocity = Vector2.zero;
+                //rg.simulated = false;
                 touchScreenSystem.SetKnifeParent(this);
                 return;
-            }
-            transform.position = pos;
+            }            
         }
     }
+   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ring"))
+        {
+            stopLine = true;
+            Debug.Log("Stop collision");
+        }
+        if (collision.gameObject.CompareTag("Knife"))
+        {
+            Debug.Log("Knife collision");
+        }
+    }
+
 }

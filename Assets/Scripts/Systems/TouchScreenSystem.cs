@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class TouchScreenSystem : MonoBehaviour 
 {
     [SerializeField] RectTransform knifeParent;
+    [SerializeField] public Transform collisionLine;
+    [SerializeField] GamePlaySystem playSystem;
     private Knife _knife;   
 
     public void GetKnife(Knife knife)
@@ -24,6 +26,12 @@ public class TouchScreenSystem : MonoBehaviour
     public void Go()
     {
         _knife.KnifeGo();
-    }    
+        Invoke(nameof(NewKnife), 0.3f);
+    }  
+    
+    private void NewKnife()
+    {
+        playSystem.CreateKnife();
+    }
 
 }
