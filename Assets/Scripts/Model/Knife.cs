@@ -42,11 +42,11 @@ public class Knife : MonoBehaviour
         if (collision.gameObject.CompareTag("Ring"))
         {
             stopLine = true;
-            Debug.Log("Stop collision");
+            touchScreenSystem.KnifeIn();
         }
         if (collision.gameObject.CompareTag("Knife"))
         {
-            Debug.Log("Knife collision");
+            
         }
     }
 

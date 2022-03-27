@@ -8,10 +8,23 @@ public class MainMenuSystem : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
     [SerializeField] GameObject challengeMenu;
-    [SerializeField] GameObject GamePlayMenu;
+    [SerializeField] GameObject gamePlayMenu;
+    List<GameObject> menus;
     public void LoadURL()
     {
         Application.OpenURL(Constants.DEVELOPER_URL);
+    }
+    private void Start()
+    {
+        menus = new List<GameObject> {mainMenu,challengeMenu,gamePlayMenu};
+    }
+    public void SetMenu(string name)
+    {
+        foreach(var menu in menus)
+        {
+            if (menu.name == name) menu.Show();
+            else menu.Hide();
+        }
     }
 
     public void ShowSettingsMenu()
@@ -22,23 +35,6 @@ public class MainMenuSystem : MonoBehaviour
     {
         settingsMenu.Hide();
     }
-    public void ShowChallengeMenu()
-    {
-        challengeMenu.Show();
-    }
-    public void HideChallengeMenu()
-    {
-        challengeMenu.Hide();
-    }
-    public void ShowGamePlay()
-    {
-        GamePlayMenu.Show();
-        mainMenu.Hide();
-    }
-    public void ShowMainMenu()
-    {
-        GamePlayMenu.Hide();
-        mainMenu.Show();
-    }
+    
 
 }

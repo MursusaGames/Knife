@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf2327df9c39204498c3dfaf70f6ca7, type: 3}
+  m_Name: Match Data
+  m_EditorClassIdentifier: 
+  appleSpawnChance: 25
+  level: 4
+  stage: 0
+  tryCount: 6
+  ring: {fileID: 21300000, guid: faf9559f61383df40ace1e7a79fe4d64, type: 3}

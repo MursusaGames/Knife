@@ -7,6 +7,7 @@ TagManager:
   - Ring
   - Knife
   - Stop
+  - Apple
   layers:
   - Default
   - TransparentFX
