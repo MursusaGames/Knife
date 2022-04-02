@@ -20,6 +20,7 @@ public class StageControllerSystem : MonoBehaviour
     int tryCount = 0;
     int currentLevel = 0;
     int tryCurrentCount = 0;
+    int maxLevel = 5;
 
     private void Awake()
     {
@@ -27,21 +28,16 @@ public class StageControllerSystem : MonoBehaviour
         {
             PlayerPrefs.SetInt(Constants.STAGE, 0);
         }
-        else
-        {
-            currentStage = PlayerPrefs.GetInt(Constants.STAGE);
-            matchData.stage = currentStage;
-            matchData.level = 0;
-            
-        }
+        matchData.tryCount = stages[currentStage].tryCount;
+        matchData.level = 0;
     }
+    
     public void TrueTry()
     {
         tryCountIcons[tryCurrentCount].color = Color.gray;
         tryCurrentCount++;
         if (tryCurrentCount >= tryCount)
         {
-            Debug.Log(tryCurrentCount + " " + tryCount);
             Invoke(nameof(WinLevel), 1f);
         }
     }
@@ -53,25 +49,37 @@ public class StageControllerSystem : MonoBehaviour
         matchData.tryCount++;
         stagePrefab.DeletLevel();
         playSystem.DeletKnifesInGame();
-        spawnSystem.ReloadLevel();
-        
+        //spawnSystem.ReloadLevel();
         playSystem.CreateKnife();
+        
     }
     public void NewLevel()
     {
         winWindow.Hide();
+        spawnSystem.ReloadLevel();
         stagePrefab.OnEnable();
         levelsIcons[currentLevel].color = Color.yellow;
         currentLevel++;
+        if(currentLevel == maxLevel)
+        {
+            currentStage++;
+            PlayerPrefs.SetInt(Constants.STAGE, currentStage);            
+        }
         OnEnable();
         SetStageInfo();
     }
     void OnEnable()
     {
+        currentStage = PlayerPrefs.GetInt(Constants.STAGE);
+        matchData.stage = currentStage;
+       
+        matchData.appleSpawnChance = stages[currentStage].appleSpawnChance;
         stagePrefab.GameStart += SetStageInfo;
         currentStage = PlayerPrefs.GetInt(Constants.STAGE);
         matchData.stage = currentStage;
-        matchData.ring = stages[currentStage].ring;
+        matchData.ringSprite = stages[currentStage].ring;
+        matchData.bossSprite = stages[currentStage].bossSprite;
+        
         tryCount = matchData.tryCount;
         
     }
@@ -88,6 +96,7 @@ public class StageControllerSystem : MonoBehaviour
             tryCountIcons[i].gameObject.Show();
             tryCountIcons[i].color = Color.white;
         }
+        
     }
 
     

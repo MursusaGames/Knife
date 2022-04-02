@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Match Data
   m_EditorClassIdentifier: 
   appleSpawnChance: 25
-  level: 4
+  level: 5
   stage: 0
-  tryCount: 6
-  ring: {fileID: 21300000, guid: faf9559f61383df40ace1e7a79fe4d64, type: 3}
+  tryCount: 11
+  ringSprite: {fileID: 21300000, guid: faf9559f61383df40ace1e7a79fe4d64, type: 3}
+  bossSprite: {fileID: 21300000, guid: 19feb417925fa2b49a756f28d5b4daa0, type: 3}

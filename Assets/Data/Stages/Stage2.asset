@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcff09e88d59e74b90d39686644b5fc, type: 3}
   m_Name: Stage2
   m_EditorClassIdentifier: 
-  appleSpawnChance: 25
+  appleSpawnChance: 100
   stage: 1
   tryCount: 6
   ring: {fileID: 21300000, guid: faf9559f61383df40ace1e7a79fe4d64, type: 3}
+  bossSprite: {fileID: 21300000, guid: 7494aa42769a48940968f1c51239726f, type: 3}

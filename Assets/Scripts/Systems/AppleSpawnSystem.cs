@@ -16,10 +16,14 @@ public class AppleSpawnSystem : MonoBehaviour
     {
         InitData();
     }
-    private void InitData()
+    private void OnEnable()
     {
         stagePrefab.GameStart += InitStage;
-        ring = matchData.ring;
+    }
+    private void InitData()
+    {
+        
+        ring = matchData.ringSprite;
         if (matchData.level < bossStage)
         {
             knifes = matchData.level;
@@ -32,12 +36,13 @@ public class AppleSpawnSystem : MonoBehaviour
         {
             knifes = 0;
             apples = 0;
+            ring = matchData.bossSprite;
         }
     } 
     public void ReloadLevel()
     {
         InitData();
-        InitStage();
+        //InitStage();
     }
     void OnDisable()
     {
@@ -53,6 +58,7 @@ public class AppleSpawnSystem : MonoBehaviour
     }
     private void InitStage()
     {
+        Debug.Log("InitStage"+ apples);
         stagePrefab.InitStage(knifes, apples, ring);
     }    
 }

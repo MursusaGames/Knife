@@ -8,7 +8,7 @@ public class StagePrefab : MonoBehaviour
     public event Action GameStart;
     [SerializeField] List<GameObject> knifes;
     [SerializeField] List<GameObject> apples;
-    [SerializeField] Sprite _ring;
+    [SerializeField] GameObject _ring;
 
     public void OnEnable()
     {
@@ -28,7 +28,7 @@ public class StagePrefab : MonoBehaviour
 
     public void InitStage(int knifeCount, int appleCount, Sprite ring)
     {
-        _ring = ring;
+        _ring.GetComponent<Image>().sprite = ring;
         if(knifeCount > 0)
         {
             int rand = UnityEngine.Random.Range(1, 3);

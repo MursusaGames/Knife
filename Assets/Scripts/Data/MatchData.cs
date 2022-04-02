@@ -8,5 +8,6 @@ public class MatchData : ScriptableObject
     public int level;
     public int stage;
     public int tryCount;
-    public Sprite ring;
+    public Sprite ringSprite;
+    public Sprite bossSprite;
 }
