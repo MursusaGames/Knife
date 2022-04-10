@@ -6,13 +6,23 @@ using UnityEngine.UI;
 public class StagePrefab : MonoBehaviour
 {
     public event Action GameStart;
-    [SerializeField] List<GameObject> knifes;
-    [SerializeField] List<GameObject> apples;
-    [SerializeField] GameObject _ring;
-
+    [SerializeField] public List<GameObject> knifes;
+    [SerializeField] public List<GameObject> apples;
+    [SerializeField] public GameObject ringTiles;
+    [SerializeField] public GameObject _ring;
+    [SerializeField] RectTransform _knifeParent;
+    private StageControllerSystem stageController;
+    private TouchScreenSystem touchScreenSystem;
     public void OnEnable()
     {
+        stageController = FindObjectOfType<StageControllerSystem>();
+        touchScreenSystem = FindObjectOfType<TouchScreenSystem>();
         GameStart?.Invoke();
+    }
+    private void Start()
+    {
+        stageController.GetStagePrefab(this);
+        touchScreenSystem.GetKnifeParent(_knifeParent);
     }
     public void DeletLevel()
     {

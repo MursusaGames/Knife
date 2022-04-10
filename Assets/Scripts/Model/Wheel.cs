@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Wheel : MonoBehaviour
 {
+    public bool noRotate;
            
     void FixedUpdate()
     {
-        this.transform.Rotate(Vector3.forward, 1f);
+        if(!noRotate) this.transform.Rotate(Vector3.forward, 1f);        
     }
 }

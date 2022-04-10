@@ -6,10 +6,14 @@ using UnityEngine.UI;
 
 public class TouchScreenSystem : MonoBehaviour 
 {
-    [SerializeField] RectTransform knifeParent;    
+    RectTransform knifeParent;    
     [SerializeField] GamePlaySystem playSystem;
     private Knife _knife;
     
+    public void GetKnifeParent(RectTransform _knifeParent)
+    {
+        knifeParent = _knifeParent;
+    }
     public void GetKnife(Knife knife)
     {
         _knife = knife;        

@@ -5,5 +5,6 @@ using UnityEngine.UI;
 public class UserData : ScriptableObject
 {
     public int score;    
-    public int apple;    
+    public int apple;
+    public Sprite currentKnife;
 }

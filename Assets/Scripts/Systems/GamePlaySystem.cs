@@ -10,6 +10,7 @@ public class GamePlaySystem : MonoBehaviour
     [SerializeField] StageControllerSystem stageController;
     [SerializeField] MatchData matchData;
     List<GameObject> knifesInGame = new List<GameObject>();
+    public List<Rigidbody2D> knifeRG = new List<Rigidbody2D>();
     int tryCount = 0;
     bool stopSpawn;
     void Start()
@@ -23,6 +24,7 @@ public class GamePlaySystem : MonoBehaviour
         {
             var _knife = Instantiate(knife, startPoint.position, Quaternion.identity, knifeParent);
             knifesInGame.Add(_knife);
+            knifeRG.Add(_knife.GetComponent<Rigidbody2D>());
         }
             
     }
@@ -30,8 +32,10 @@ public class GamePlaySystem : MonoBehaviour
     {
         foreach(var knife in knifesInGame)
         {
-            Destroy(knife, 1f);
+            Destroy(knife);
         }
+        knifesInGame.Clear();
+        knifeRG.Clear();
         stopSpawn = false;
         tryCount = 0;
     }

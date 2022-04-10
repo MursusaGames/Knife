@@ -6,7 +6,10 @@ using TMPro;
 
 public class StageControllerSystem : MonoBehaviour
 {
-    [SerializeField] StagePrefab stagePrefab;
+    [SerializeField] Transform _forcePoint;
+    [SerializeField] Wheel wheel;
+    [SerializeField] GameObject stagePrefabGO;
+    StagePrefab stagePrefab;
     [SerializeField] GamePlaySystem playSystem;
     [SerializeField] AppleSpawnSystem spawnSystem;
     [SerializeField] List<Image> levelsIcons = new List<Image>();
@@ -16,6 +19,7 @@ public class StageControllerSystem : MonoBehaviour
     [SerializeField] MatchData matchData;
     [SerializeField] GameObject winWindow;
     [SerializeField] GameObject gamePlayWindow;
+    private List<Rigidbody2D> rgList = new List<Rigidbody2D>();
     int currentStage = 0;
     int tryCount = 0;
     int currentLevel = 0;
@@ -30,28 +34,74 @@ public class StageControllerSystem : MonoBehaviour
         }
         matchData.tryCount = stages[currentStage].tryCount;
         matchData.level = 0;
+        
     }
-    
+
+    private void GetRg()
+    {
+        foreach(var apple in stagePrefab.apples)
+        {
+            var appleRg = apple.GetComponent<Rigidbody2D>();
+            rgList.Add(appleRg);
+        }
+        foreach (var knife in stagePrefab.knifes)
+        {
+            var knifeRg = knife.GetComponent<Rigidbody2D>();
+            rgList.Add(knifeRg);
+        }
+    }
+    public void GetStagePrefab(StagePrefab _stagePrefab)
+    {
+        stagePrefab = _stagePrefab;
+        spawnSystem.GetStagePrefab(_stagePrefab);
+        SetStageInfo();
+    }
     public void TrueTry()
     {
         tryCountIcons[tryCurrentCount].color = Color.gray;
         tryCurrentCount++;
         if (tryCurrentCount >= tryCount)
         {
-            Invoke(nameof(WinLevel), 1f);
+            GetRg();
+            Invoke(nameof(Explosion),0.1f);
+            Invoke(nameof(WinLevel), 1.1f);
         }
+    }
+
+    private void Explosion()
+    {
+        wheel.noRotate = true;
+        foreach(var rg in rgList)
+        {
+            rg.gravityScale = 1;
+        }
+        foreach (var knifeRg in playSystem.knifeRG)
+        {
+            knifeRg.gravityScale = 1;
+            knifeRg.AddForceAtPosition(Vector2.left * Random.Range(-5f, 5f) + Vector2.up * Random.Range(1f, 5f),
+                _forcePoint.position,ForceMode2D.Impulse);
+        }
+        stagePrefab._ring.SetActive(false);
+        stagePrefab.ringTiles.SetActive(true);
     }
     private void WinLevel()
     {
+        rgList.Clear();
         tryCurrentCount = 0;
         winWindow.Show();
         matchData.level++;
         matchData.tryCount++;
-        stagePrefab.DeletLevel();
+        Destroy(stagePrefab.gameObject);
+        Instantiate(stagePrefabGO, wheel.gameObject.transform);
         playSystem.DeletKnifesInGame();
         //spawnSystem.ReloadLevel();
         playSystem.CreateKnife();
-        
+        //stagePrefab._ring.SetActive(true);
+        //foreach (var rg in rgList)
+        //{
+        //    rg.simulated = false;
+        //}
+        wheel.noRotate = false;
     }
     public void NewLevel()
     {
@@ -74,7 +124,7 @@ public class StageControllerSystem : MonoBehaviour
         matchData.stage = currentStage;
        
         matchData.appleSpawnChance = stages[currentStage].appleSpawnChance;
-        stagePrefab.GameStart += SetStageInfo;
+        
         currentStage = PlayerPrefs.GetInt(Constants.STAGE);
         matchData.stage = currentStage;
         matchData.ringSprite = stages[currentStage].ring;
@@ -82,11 +132,7 @@ public class StageControllerSystem : MonoBehaviour
         
         tryCount = matchData.tryCount;
         
-    }
-    private void OnDisable()
-    {
-        stagePrefab.GameStart -= SetStageInfo;
-    }
+    }    
 
     private void SetStageInfo()
     {

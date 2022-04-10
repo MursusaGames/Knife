@@ -16,6 +16,7 @@ public class Apple : MonoBehaviour
     }
     private void OnEnable()
     {
+        scoreSystem = FindObjectOfType<ScoreAndAppleCountSystem>();
         checkApple = Instantiate(checkApplePrefab, transform.position, Quaternion.identity,this.transform);
         yellowApple = checkApple.GetComponent<YellowApple>();
         checkApple.Hide();

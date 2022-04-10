@@ -6,18 +6,21 @@ using UnityEngine.UI;
 public class AppleSpawnSystem : MonoBehaviour
 {
     [SerializeField] MatchData matchData;
-    [SerializeField] StagePrefab stagePrefab;
+    StagePrefab stagePrefab;
     int apples;
     int knifes;
     int bossStage = 4;
     private Sprite ring;
-    
+    bool isStagePrefab;
     private void Start()
     {
         InitData();
     }
-    private void OnEnable()
+    
+    public void GetStagePrefab(StagePrefab _stagePrefab)
     {
+        stagePrefab = _stagePrefab;
+        isStagePrefab = true;
         stagePrefab.GameStart += InitStage;
     }
     private void InitData()
@@ -46,7 +49,7 @@ public class AppleSpawnSystem : MonoBehaviour
     }
     void OnDisable()
     {
-        stagePrefab.GameStart -= InitStage;
+        if(isStagePrefab) stagePrefab.GameStart -= InitStage;
     }
 
     private bool GetAppleCount()
@@ -58,7 +61,6 @@ public class AppleSpawnSystem : MonoBehaviour
     }
     private void InitStage()
     {
-        Debug.Log("InitStage"+ apples);
         stagePrefab.InitStage(knifes, apples, ring);
     }    
 }
