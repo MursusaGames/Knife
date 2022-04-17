@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf2327df9c39204498c3dfaf70f6ca7, type: 3}
   m_Name: Match Data
   m_EditorClassIdentifier: 
-  appleSpawnChance: 25
-  level: 5
+  localizationData: {fileID: 11400000, guid: cc55b141c076aa440a6a8a343d92ebca, type: 2}
+  appleSpawnChance: 100
+  level: 4
   stage: 0
-  tryCount: 11
+  tryCount: 10
   ringSprite: {fileID: 21300000, guid: faf9559f61383df40ace1e7a79fe4d64, type: 3}
   bossSprite: {fileID: 21300000, guid: 19feb417925fa2b49a756f28d5b4daa0, type: 3}
+  moneyData: {fileID: 11400000, guid: 165c1fb4826f6614d8155db13b7f89ea, type: 2}
+  state:
+    value: 0

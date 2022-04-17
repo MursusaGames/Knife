@@ -10,6 +10,7 @@ public class MainMenuSystem : MonoBehaviour
     [SerializeField] GameObject challengeMenu;
     [SerializeField] GameObject gamePlayMenu;
     [SerializeField] GameObject powerUpsMenu;
+    [SerializeField] GameObject knifesMenu;
     List<GameObject> menus;
     public void LoadURL()
     {
@@ -43,6 +44,14 @@ public class MainMenuSystem : MonoBehaviour
     public void HidePowerUpsMenu()
     {
         powerUpsMenu.Hide();
+    }
+    public void ShowKnifessMenu()
+    {
+        knifesMenu.Show();
+    }
+    public void HideKnifesMenu()
+    {
+        knifesMenu.Hide();
     }
 
 

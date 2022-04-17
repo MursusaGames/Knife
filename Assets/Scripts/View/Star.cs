@@ -7,6 +7,7 @@ public class Star : MonoBehaviour
     private bool isRotate;   
     private bool increace;
     private float speed;
+    public bool isRevers;
     void OnEnable()
     {
         Invoke(nameof(Rotate), Random.Range(0f, 1f));
@@ -27,8 +28,9 @@ public class Star : MonoBehaviour
         {
             if (this.gameObject.transform.localScale.x < 0) increace = true;
             else if (this.gameObject.transform.localScale.x > 1) increace = false;
-            this.gameObject.transform.Rotate(Vector3.forward);
-            if(!increace)  this.gameObject.transform.localScale -= new Vector3(0.02f,0.02f,0.02f);
+            if(!isRevers) this.gameObject.transform.Rotate(Vector3.forward);
+            else this.gameObject.transform.Rotate(Vector3.back);
+            if (!increace)  this.gameObject.transform.localScale -= new Vector3(0.02f,0.02f,0.02f);
             else this.gameObject.transform.localScale += new Vector3(0.02f, 0.02f, 0.02f);
         }
     }
