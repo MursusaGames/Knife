@@ -15,12 +15,7 @@ public class CustomPrefab : MonoBehaviour
 
     private BrainScrolling _brainScolling;
 
-    public void InitScrollButtons(BrainScrolling scroll)
-    {
-        _brainScolling = scroll;
-        rightArrowButton.onClick.AddListener(_brainScolling.ScrollRight);
-        leftArrowButton.onClick.AddListener(_brainScolling.ScrollLeft);
-    }
+    
 
     public void ButtonsUnsub()
     {

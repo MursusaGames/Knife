@@ -6,126 +6,161 @@ using TMPro;
 
 public class BrainScrolling : MonoBehaviour
 {
+    [Range(1, 10)]
     [Header("Contollers")]
-    [SerializeField, Range(0, 700)] private int panSpace;
-    [SerializeField, Range(0f, 20f)] private float snapSpeed;
-    [SerializeField, Range(0f, 5f)] private float scaleOffset;
-
+    private int panCount;
+    [Range(0, 700)]
+    public int panSpace;
+    [Range(0f, 20f)]
+    public float snapSpeed;
+    [Range(0f, 5f)]
+    public float scaleOffset;
     [Header("Other Objects")]
-    [SerializeField] private GameObject brainPrefab;
-    [SerializeField] private GameObject swipeHand;
-    [SerializeField] private CustomPrefab panPrefab;
-    [SerializeField] private CustomChoiceSystem customSystem;
-    [SerializeField] private TMP_Text playerBrainNameText;
-    [SerializeField] private TMP_Text bayBtnText;
-    [SerializeField] private Image buyBtnImage;
-    [SerializeField] private SubscribePanel panel;
-    [SerializeField] private Image _currentPlayerSkin;
-    [SerializeField] private ScrollRect scrollRect;
-    [SerializeField] private RectTransform _container;
-    [SerializeField] private string buyBtnTitle = "BUY";
+    public GameObject panPrefab;
+    [SerializeField]  CustomChoiceSystem customSystem;
+    [SerializeField]  TextMeshProUGUI bayBtnText;
+    [SerializeField] TextMeshProUGUI subscribeText;
+    [SerializeField]  List<Image> rings;
+    [SerializeField] Image bgTopText;
+    [SerializeField] GameObject aplesBag;
+    [SerializeField] GameObject videosBag;
+    [SerializeField] GameObject bossesBag;
+    [SerializeField] GameObject challengeBag;
+    [SerializeField] GameObject packsBag;
+    GameObject[] instPans;
+    Vector2[] panPos;
+    Vector2[] panScale;
+    Vector2 contentVector;
 
+    RectTransform contentRect;
+    int selectedPanID;
+    public bool isScrolling;
+    public string buyBtnTitle = "BUY";
 
-    private GameObject[] _instPans;
-    private Vector2[] _panPos;
-    private Vector2[] _panScale;
-    private Vector2 _contentVector;
-    private RectTransform _contentRect;
-    private int _selectedPanID;
-    private int _panCount;
-    private bool _isScrolling;
-
+    public ScrollRect scrollRect;
+    //[SerializeField] GameObject brainPrefab;
+    //[SerializeField] GameObject swipeHand;
+   
 
     private void Start()
     {
-        _panCount = 10;  //TODO изменить на количество страниц в скролле
-        _panScale = new Vector2[_panCount];
-        _contentRect = GetComponent<RectTransform>();
-        _panPos = new Vector2[_panCount];
-        _instPans = new GameObject[_panCount];
+        panCount = 10; //System.Enum.GetValues(typeof(SkinType)).Length;       
+        panScale = new Vector2[panCount];
+        contentRect = GetComponent<RectTransform>();
+        panPos = new Vector2[panCount];
+        instPans = new GameObject[panCount];
 
-        for (int i = 0; i < _panCount; i++)
+        for (int i = 0; i < panCount; i++)
         {
-            _instPans[i] = Instantiate(brainPrefab, transform, false);
-            _instPans[i].GetComponent<Image>().sprite = customSystem.customsSprites[i];
+            instPans[i] = Instantiate(panPrefab, transform, false);
+            instPans[i].GetComponent<BGPrefabScript>().id = i;            
             if (i == 0) continue;
 
-            var tmpX = _instPans[i - 1].transform.localPosition.x + panPrefab.GetComponent<RectTransform>().sizeDelta.x + panSpace;
-            _instPans[i].transform.localPosition = new Vector2(tmpX, _instPans[i].transform.localPosition.y);
-            _panPos[i] = -_instPans[i].transform.localPosition;
+            var tmpX = instPans[i - 1].transform.localPosition.x + panPrefab.GetComponent<RectTransform>().sizeDelta.x/2 + panSpace;
+            instPans[i].transform.localPosition = new Vector2(tmpX, instPans[i].transform.localPosition.y);
+            panPos[i] = -instPans[i].transform.localPosition;
         }
-
-        var spriteIndex = PlayerPrefs.GetInt("PlayerSprites");
-        var playerSkinName = PlayerPrefs.GetString("PlayerSkinName", panel.GetBrainName(0));
-
-        UpdateCurrentPlayerSkin(spriteIndex);
-        SetPlayerBrainText(playerSkinName);
     }
-
 
     private void FixedUpdate()
     {
-        if (_isScrolling && !PlayerPrefs.HasKey("SwipeHelp"))
+        /*if(isScrolling && !PlayerPrefs.HasKey("SwipeHelp"))
         {
             PlayerPrefs.SetString("SwipeHelp", "Used");
             swipeHand.SetActive(false);
-        }
+        }*/
 
-        if (!_isScrolling && (_contentRect.anchoredPosition.x >= _panPos[0].x || _contentRect.anchoredPosition.x <= _panPos[_panPos.Length - 1].x))
+        if (!isScrolling && (contentRect.anchoredPosition.x >= panPos[0].x || contentRect.anchoredPosition.x <= panPos[panPos.Length - 1].x))
         {
             scrollRect.inertia = false;
         }
-
+            
 
         float nearestPos = float.MaxValue;
-        for (int i = 0; i < _panCount; i++)
+        for (int i = 0; i < panCount; i++)
         {
-            float distance = Mathf.Abs(_contentRect.anchoredPosition.x - _panPos[i].x);
+            float distance = Mathf.Abs(contentRect.anchoredPosition.x - panPos[i].x);
             if (distance < nearestPos)
             {
                 nearestPos = distance;
-                _selectedPanID = i;
+                selectedPanID = i;
             }
 
             float scale = Mathf.Clamp(1 / (distance / panSpace) * scaleOffset, .5f, 1f);
-            _panScale[i].x = Mathf.SmoothStep(_instPans[i].transform.localScale.x, scale, 10 * Time.fixedDeltaTime);
-            _panScale[i].y = Mathf.SmoothStep(_instPans[i].transform.localScale.y, scale, 10 * Time.fixedDeltaTime);
-            _instPans[i].transform.localScale = _panScale[i];
+            panScale[i].x = Mathf.SmoothStep(instPans[i].transform.localScale.x, scale, 10 * Time.fixedDeltaTime);
+            panScale[i].y = Mathf.SmoothStep(instPans[i].transform.localScale.y, scale, 10 * Time.fixedDeltaTime);
+            instPans[i].transform.localScale = panScale[i];
         }
 
         float scrollVelosity = Mathf.Abs(scrollRect.velocity.x);
 
-        if (scrollVelosity < 1000 && !_isScrolling)
+        if (scrollVelosity < 1000 && !isScrolling)
             scrollRect.inertia = false;
 
-        if (_isScrolling || scrollVelosity > 1000)
+        if (isScrolling || scrollVelosity > 1000)
             return;
 
-        _contentVector.x = Mathf.SmoothStep(_contentRect.anchoredPosition.x, _panPos[_selectedPanID].x, snapSpeed * Time.fixedDeltaTime);
-        _contentRect.anchoredPosition = _contentVector;
+        contentVector.x = Mathf.SmoothStep(contentRect.anchoredPosition.x, panPos[selectedPanID].x, snapSpeed * Time.fixedDeltaTime);
+        contentRect.anchoredPosition = contentVector;
         UpgradePanel();
     }
 
     public void UpgradePanel()
     {
-        if (0 <= _selectedPanID && 10 >= _selectedPanID)
+        if (0 <= selectedPanID && 10 >= selectedPanID)
         {
-            panel.ShowPanel(_selectedPanID);
-
-            if (_selectedPanID == PlayerPrefs.GetInt("PlayerSprites"))
+            subscribeText.text = customSystem.customsSubscribe[selectedPanID];
+            foreach(var ring in rings)
             {
-                bayBtnText.text = "CHOSEN";
-                buyBtnImage.color = Color.gray;
-                buyBtnImage.gameObject.GetComponent<Button>().interactable = false;
-                SetPlayerBrainText(panel.GetBrainName(_selectedPanID));
-                return;
+                ring.color = Color.white;
             }
+            rings[selectedPanID].color = Color.green;
+            aplesBag.SetActive(selectedPanID < 3);
+            videosBag.SetActive(selectedPanID > 2 && selectedPanID < 5);
+            bossesBag.SetActive(selectedPanID > 4 && selectedPanID < 7);
+            challengeBag.SetActive(selectedPanID > 6 && selectedPanID < 9);
+            packsBag.SetActive(selectedPanID > 8);
+            switch (selectedPanID){
+                case 0:
+                    bgTopText.color = Color.green;
+                    break;
+                case 1:
+                    bgTopText.color = Color.green;
+                    break;
+                case 2:
+                    bgTopText.color = Color.green;
+                    break;
+                case 3:
+                    bgTopText.color = Color.blue;
+                    break;
+                case 4:
+                    bgTopText.color = Color.blue;
+                    break;
+                case 5:
+                    bgTopText.color = Color.red;
+                    break;
+                case 6:
+                    bgTopText.color = Color.red;
+                    break;
+                case 7:
+                    bgTopText.color = Color.cyan;
+                    break;
+                case 8:
+                    bgTopText.color = Color.cyan;
+                    break;
+                case 9:
+                    bgTopText.color = Color.gray;
+                    break;
+            }
+            
+            
 
-            buyBtnImage.color = Color.yellow;
-            buyBtnImage.gameObject.GetComponent<Button>().interactable = true;
 
-            bayBtnText.text = PlayerPrefs.HasKey("PlayerSprites") && 1 == PlayerPrefs.GetInt("id" + _selectedPanID.ToString()) ||
-                PlayerPrefs.HasKey("PlayerSprites") && 0 == _selectedPanID ? "CHOICE" : buyBtnTitle;
+            //buyBtnImage.color = Color.yellow;
+            //buyBtnImage.gameObject.GetComponent<Button>().interactable = true;
+
+            //bayBtnText.text = PlayerPrefs.HasKey("PlayerSprites") && 1 == PlayerPrefs.GetInt("id" + selectedPanID.ToString()) ||
+                //PlayerPrefs.HasKey("PlayerSprites") && 0 == selectedPanID ? "CHOICE" : buyBtnTitle;            
         }
         else
             Debug.Log("Number out of range");
@@ -133,45 +168,14 @@ public class BrainScrolling : MonoBehaviour
 
     public void Scroll(bool scroll)
     {
-        _isScrolling = scroll;
+        isScrolling = scroll;
 
         if (scroll)
             scrollRect.inertia = true;
     }
-    public void BuyBrainSkin()
+    public void BayCustom()
     {
-        customSystem.BuyBrain(_selectedPanID);
-        UpdateCurrentPlayerSkin(_selectedPanID);
-        SetPlayerBrainText(panel.GetBrainName(_selectedPanID));
+        customSystem.BayCustom(selectedPanID);
     }
-
-    public void SetPlayerBrainText(string name)
-    {
-        PlayerPrefs.SetString("PlayerSkinName", name);
-        playerBrainNameText.SetText(name);
-    }
-
-    private void UpdateCurrentPlayerSkin(int spriteIndex)
-    {
-        _currentPlayerSkin.sprite = customSystem.customsSprites[spriteIndex];
-    }
-
-
-    public void ScrollRight()
-    {
-        int temp = 1153;
-        if (_selectedPanID >= _panCount - 1)
-            return;
-        _container.anchoredPosition = new Vector2(_container.anchoredPosition.x - temp, _container.anchoredPosition.y);
-    }
-
-    public void ScrollLeft()
-    {
-        int temp = -1153;
-        if (_selectedPanID <= 0)
-            return;
-        _container.anchoredPosition = new Vector2(_container.anchoredPosition.x - temp, _container.anchoredPosition.y);
-    }
-
 
 }

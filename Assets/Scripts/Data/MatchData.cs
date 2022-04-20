@@ -13,6 +13,7 @@ public class MatchData : ScriptableObject
     public Sprite ringSprite;
     public Sprite bossSprite;
     public MoneyData moneyData;
+    public CustomsDataContainer CustomDataContainer;
     public enum State
     {
         MainMenu,

@@ -17,7 +17,7 @@ public class SubscribePanel : MonoBehaviour
     private void Start()
     {
         _customInfoPanel = Instantiate(_panPrefab, transform, false);
-        _customInfoPanel.InitScrollButtons(_scrollingSystem);
+        
     }
     public void ShowPanel(int id)
     {

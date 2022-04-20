@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
-//using Cysharp.Threading.Tasks;
+
+
+
 
 public class CustomChoiceSystem : MonoBehaviour
 {
-    [SerializeField] CustomsSection customSection;
-    [SerializeField] SkinSaver skinSaver;
-    [SerializeField] MatchData data;
+    //[SerializeField] CustomsSection customSection;
+    //[SerializeField] SkinSaver skinSaver;
   
     public Sprite[] customsSprites;
     public string[] customsSubscribe;
@@ -18,24 +19,15 @@ public class CustomChoiceSystem : MonoBehaviour
     public string[] customsPrices;
     public int simulator1SpriteIndex;
     public int simulator2SpriteIndex;
+    [SerializeField] MatchData data;
 
     private int _id;
 
-    /*public override void Init(AppData data)
-    {
-        base.Init(data);
-        SetObservables();
-        InitializeData();
-    }*/
+    
 
-    /*private void SetObservables()
-    {
-        data.moneyData.state
-            .Where(x => x == MoneyData.State.Waiting)
-            .Subscribe(_ => BuyCustom(_id));
-    }*/
+    
 
-   /* private void InitializeData()
+    private void InitializeData()
     {
         //Через список можно нечаянно стереть данные из SO, поэтому на прямую из data
         int amount = data.CustomDataContainer.CustomsItems.Count;
@@ -54,18 +46,18 @@ public class CustomChoiceSystem : MonoBehaviour
             customsNames[i] = data.CustomDataContainer.CustomsItems[i].CustomNames;
             customsSubscribeEN[i] = data.CustomDataContainer.CustomsItems[i].CustomSubscribeEN;
             customsNamesEN[i] = data.CustomDataContainer.CustomsItems[i].CustomNamesEN;
-            customsPrices[i] = data.CustomDataContainer.CustomsItems[i].CustomPrices;
+            customsPrices[i] = data.CustomDataContainer.CustomsItems[i].CustomPrices.ToString();
         }
-    }*/
+    }
 
-    public void BuyBrain(int id)
+    public void BayCustom(int id)
     {
         _id = id;
         if(PlayerPrefs.GetInt("id" + id.ToString()) == 0) data.moneyData.CreateOrder(int.Parse(customsPrices[id]));
         else data.moneyData.CreateOrder(0);
     }
     
-   /* public async UniTask BuyCustom(int id)
+    /*public async UniTask BuyCustom(int id)
     {
         //data.moneyData.CreateOrder(int.Parse(customsPrices[id]));
 
