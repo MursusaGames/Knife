@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class StageControllerSystem : MonoBehaviour
 {
     [SerializeField] Transform _forcePoint;
@@ -144,6 +145,6 @@ public class StageControllerSystem : MonoBehaviour
         }
         
     }
-
     
+
 }

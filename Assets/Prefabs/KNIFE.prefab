@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -707.9}
-  m_SizeDelta: {x: 189.6, y: 275.8}
+  m_SizeDelta: {x: 198.1, y: 242.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1264390603018846607
 CanvasRenderer:
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGo: 0
-  speed: 3.6
+  speed: 3
 --- !u!61 &6360233212712816155
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -106,7 +106,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.6538696, y: 2.6936493}
+  m_Offset: {x: -0.29429626, y: 0.25602722}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -117,7 +117,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 29.129822, y: 266.4321}
+  m_Size: {x: 18.321259, y: 242.28659}
   m_EdgeRadius: 0
 --- !u!50 &62765754292812621
 Rigidbody2D:

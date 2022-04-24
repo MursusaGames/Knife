@@ -8,7 +8,12 @@ public class ScoreAndAppleCountSystem : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI appleText;
     [SerializeField] UserData userData;
+    AudioSource audioS;
 
+    private void Awake()
+    {
+        audioS = GetComponent<AudioSource>();
+    }
     private void Start()
     {
         appleText.text = userData.apple.ToString();
@@ -17,6 +22,7 @@ public class ScoreAndAppleCountSystem : MonoBehaviour
     public void AddApple()
     {
         userData.apple++;
-        appleText.text = userData.apple.ToString();        
+        appleText.text = userData.apple.ToString();
+        audioS.Play();
     }
 }

@@ -23,11 +23,14 @@ public class TouchScreenSystem : MonoBehaviour
         knife.gameObject.transform.SetParent(knifeParent);
         
     }
-
+    public void GameOver()
+    {
+        playSystem.GameOver();
+    }
     public void KnifeIn()
     {
         playSystem.KnifeIsGo();
-        Invoke(nameof(NewKnife), 0.05f);
+        Invoke(nameof(NewKnife), 0.01f);
     }
 
     public void Go()

@@ -46,7 +46,10 @@ public class Knife : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Knife"))
         {
-            
+            rg.gravityScale = 5;
+            isGo = false;
+            rg.velocity = Vector2.zero;
+            touchScreenSystem.GameOver();
         }
     }
 

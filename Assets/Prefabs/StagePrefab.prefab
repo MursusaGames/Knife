@@ -735,7 +735,7 @@ GameObject:
   - component: {fileID: 4020618809570830586}
   m_Layer: 7
   m_Name: Knife5
-  m_TagString: Untagged
+  m_TagString: Knife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 7966398393464248655}
   m_Layer: 7
   m_Name: Knife3
-  m_TagString: Untagged
+  m_TagString: Knife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1025,7 +1025,7 @@ GameObject:
   - component: {fileID: 7966398393650362063}
   m_Layer: 7
   m_Name: Knife4
-  m_TagString: Untagged
+  m_TagString: Knife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1150,7 +1150,7 @@ GameObject:
   - component: {fileID: 3455047433577523331}
   m_Layer: 7
   m_Name: Knife1
-  m_TagString: Untagged
+  m_TagString: Knife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1425,7 +1425,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -2.69, y: -11.1}
   serializedVersion: 2
-  m_Radius: 110.25
+  m_Radius: 159.76
 --- !u!1 &7966398394253726112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,7 +1477,7 @@ GameObject:
   - component: {fileID: 7966398394595614707}
   m_Layer: 7
   m_Name: Knife2
-  m_TagString: Untagged
+  m_TagString: Knife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

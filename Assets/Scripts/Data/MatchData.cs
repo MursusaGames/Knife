@@ -10,6 +10,7 @@ public class MatchData : ScriptableObject
     public int level;
     public int stage;
     public int tryCount;
+    public bool isGift;
     public Sprite ringSprite;
     public Sprite bossSprite;
     public MoneyData moneyData;
