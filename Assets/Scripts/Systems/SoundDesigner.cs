@@ -25,7 +25,7 @@ public enum SoundBaseType
 }
 public class SoundDesigner : MonoBehaviour
 {
-    private static SoundDesigner _instance;
+    public static SoundDesigner _instance;
     public static bool SoundMuted { get; set; }
     public static bool MusicMuted { get; set; }
 

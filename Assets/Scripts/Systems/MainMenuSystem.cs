@@ -11,6 +11,7 @@ public class MainMenuSystem : MonoBehaviour
     [SerializeField] GameObject gamePlayMenu;
     [SerializeField] GameObject powerUpsMenu;
     [SerializeField] GameObject knifesMenu;
+    [SerializeField] GameObject gameOverMenu;
     List<GameObject> menus;
     public void LoadURL()
     {
@@ -27,6 +28,10 @@ public class MainMenuSystem : MonoBehaviour
             if (menu.name == name) menu.Show();
             else menu.Hide();
         }
+    }
+    public void HideGameOverMenu()
+    {
+        gameOverMenu.Hide();
     }
 
     public void ShowSettingsMenu()

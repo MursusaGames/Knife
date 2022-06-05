@@ -102,7 +102,8 @@ public class StageControllerSystem : MonoBehaviour
         //{
         //    rg.simulated = false;
         //}
-        wheel.noRotate = false;
+        wheel.noRotate = false;        
+        
     }
     public void NewLevel()
     {

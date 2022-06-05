@@ -9,6 +9,7 @@ public class MatchData : ScriptableObject
     public int appleSpawnChance;    
     public int level;
     public int stage;
+    public int numberOffKnifes;
     public int tryCount;
     public bool isGift;
     public Sprite ringSprite;

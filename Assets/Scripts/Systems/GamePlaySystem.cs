@@ -9,8 +9,9 @@ public class GamePlaySystem : MonoBehaviour
     [SerializeField] Transform knifeParent;
     [SerializeField] Transform startPoint;
     [SerializeField] StageControllerSystem stageController;
-    [SerializeField] MatchData matchData;
+    public MatchData matchData;
     [SerializeField] GameObject gameOverWindow;
+    [SerializeField] GameObject gamePlayWindow;
     List<GameObject> knifesInGame = new List<GameObject>();
     public List<Rigidbody2D> knifeRG = new List<Rigidbody2D>();
     List<BoxCollider2D> knifeCol = new List<BoxCollider2D>();
@@ -19,6 +20,7 @@ public class GamePlaySystem : MonoBehaviour
     void Start()
     {
         CreateKnife();
+        matchData.numberOffKnifes = 0;
     }
 
     public void CreateKnife()
@@ -66,11 +68,17 @@ public class GamePlaySystem : MonoBehaviour
 
     public void GameOver()
     {
+        Invoke(nameof(Delay), 1f);
+    }
+
+    private void Delay()
+    {
         gameOverWindow.Show();
     }
 
     public void ReloadGame()
     {
+        gamePlayWindow.Hide();
         gameOverWindow.Hide();
         SceneManager.LoadScene(0);
     }

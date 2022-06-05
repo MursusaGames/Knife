@@ -34,7 +34,7 @@ public class TimerSystem : MonoBehaviour
     }
     void ScheduleTimer()
     {
-        expiryTime = DateTime.Now.AddHours(1.0);
+        expiryTime = DateTime.Now.AddHours(24.0);
         this.WriteTimestamp("timer");
     }
     private bool ReadTimestamp(string key)

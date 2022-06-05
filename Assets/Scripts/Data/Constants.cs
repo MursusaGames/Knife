@@ -8,5 +8,5 @@ public static class Constants
     public const string SOUND = "Sound";
     public const string MUSIC = "Music";
     public const string VIBRO = "Vibro";
-    public const string STAGE = "StaGe";
+    public const string STAGE = "StaGE";
 }

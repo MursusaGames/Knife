@@ -8,13 +8,14 @@ public class Knife : MonoBehaviour
     public bool isGo;
     bool stopLine;
     private Rigidbody2D rg;
-    
+    private AudioSource soundKnifeInTree;    
     [SerializeField] float speed = 0.1f;
     void Awake()
     {
         rg = GetComponent<Rigidbody2D>();
         touchScreenSystem = FindObjectOfType<TouchScreenSystem>();
         touchScreenSystem.GetKnife(this);
+        soundKnifeInTree = GetComponent<AudioSource>();
     }
 
     public void KnifeGo()
@@ -42,11 +43,13 @@ public class Knife : MonoBehaviour
         if (collision.gameObject.CompareTag("Ring"))
         {
             stopLine = true;
-            touchScreenSystem.KnifeIn();
+            soundKnifeInTree.Play();
+            touchScreenSystem.KnifeIn();            
         }
         if (collision.gameObject.CompareTag("Knife"))
         {
-            rg.gravityScale = 5;
+            Handheld.Vibrate();
+            rg.gravityScale = 2;
             isGo = false;
             rg.velocity = Vector2.zero;
             touchScreenSystem.GameOver();
