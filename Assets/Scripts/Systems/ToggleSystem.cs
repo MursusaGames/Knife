@@ -177,4 +177,8 @@ public class ToggleSystem : MonoBehaviour
             isVibro = false;
         }
     }
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

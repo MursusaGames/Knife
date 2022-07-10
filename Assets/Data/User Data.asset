@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: User Data
   m_EditorClassIdentifier: 
   score: 0
-  apple: 0
+  apple: 100
   currentKnife: {fileID: 21300000, guid: 65dd06acab4f3aa47b5ce0576e429eae, type: 3}

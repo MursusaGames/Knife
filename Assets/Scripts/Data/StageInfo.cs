@@ -8,5 +8,8 @@ public class StageInfo : ScriptableObject
     public int stage;
     public int tryCount;
     public Sprite ring;
+    public Sprite prizKnife;
     public Sprite bossSprite;
+    public int speed;
+    public bool changeRotate;
 }

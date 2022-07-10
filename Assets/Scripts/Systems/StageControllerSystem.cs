@@ -19,6 +19,7 @@ public class StageControllerSystem : MonoBehaviour
     [SerializeField] TextMeshProUGUI stageText;
     [SerializeField] MatchData matchData;
     [SerializeField] GameObject winWindow;
+    [SerializeField] private GameObject bonusWindow;
     [SerializeField] GameObject gamePlayWindow;
     private List<Rigidbody2D> rgList = new List<Rigidbody2D>();
     int currentStage = 0;
@@ -29,6 +30,7 @@ public class StageControllerSystem : MonoBehaviour
 
     private void Awake()
     {
+        currentStage = matchData.stage;
         if (!PlayerPrefs.HasKey(Constants.STAGE))
         {
             PlayerPrefs.SetInt(Constants.STAGE, 0);
@@ -107,16 +109,23 @@ public class StageControllerSystem : MonoBehaviour
     }
     public void NewLevel()
     {
+        if (currentLevel == maxLevel)
+        {
+            currentStage++;
+            PlayerPrefs.SetInt(Constants.STAGE, currentStage);
+            matchData.level = 0;
+            matchData.tryCount = 0;
+            Debug.Log("NewStage");
+            winWindow.Hide();
+            bonusWindow.Show();
+            return;
+        }
         winWindow.Hide();
         spawnSystem.ReloadLevel();
         stagePrefab.OnEnable();
         levelsIcons[currentLevel].color = Color.yellow;
         currentLevel++;
-        if(currentLevel == maxLevel)
-        {
-            currentStage++;
-            PlayerPrefs.SetInt(Constants.STAGE, currentStage);            
-        }
+        
         OnEnable();
         SetStageInfo();
     }
@@ -136,6 +145,10 @@ public class StageControllerSystem : MonoBehaviour
         
     }    
 
+    public void NewStage()
+    {
+
+    }
     private void SetStageInfo()
     {
         stageText.text = "STAGE" + currentStage;
