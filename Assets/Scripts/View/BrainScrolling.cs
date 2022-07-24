@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -18,7 +17,7 @@ public class BrainScrolling : MonoBehaviour
     [Header("Other Objects")]
     public GameObject panPrefab;
     [SerializeField]  CustomChoiceSystem customSystem;
-    [SerializeField]  TextMeshProUGUI bayBtnText;
+    //[SerializeField]  TextMeshProUGUI bayBtnText;
     [SerializeField] TextMeshProUGUI subscribeText;
     [SerializeField]  List<Image> rings;
     [SerializeField] Image bgTopText;
@@ -38,9 +37,14 @@ public class BrainScrolling : MonoBehaviour
     public string buyBtnTitle = "BUY";
 
     public ScrollRect scrollRect;
-    //[SerializeField] GameObject brainPrefab;
-    //[SerializeField] GameObject swipeHand;
-   
+    [SerializeField] private TextMeshProUGUI bossBagKnifeNumber;    
+    [SerializeField] private TextMeshProUGUI videoBagKnifeNumber;
+    [SerializeField] private CustomsDataContainer bossKnife_1_Container;
+    [SerializeField] private CustomsDataContainer appleKnife_1_Container;
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey(Constants.APPLE_1_DATA + 0)) PlayerPrefs.SetInt(Constants.APPLE_1_DATA + 0, 1);
+    }
 
     private void Start()
     {
@@ -53,7 +57,61 @@ public class BrainScrolling : MonoBehaviour
         for (int i = 0; i < panCount; i++)
         {
             instPans[i] = Instantiate(panPrefab, transform, false);
-            instPans[i].GetComponent<BGPrefabScript>().id = i;            
+            var panelScript = instPans[i].GetComponent<BGPrefabScript>();
+            panelScript.id = i;
+            switch (i)
+            {
+                case 0:
+                    for (int j = 0; j < appleKnife_1_Container.CustomsItems.Count; j++)
+                    {
+                        panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.sprite = appleKnife_1_Container.CustomsItems[j].CustomSprites;
+                        if (PlayerPrefs.HasKey(Constants.APPLE_1_DATA+j))
+                        {
+                            panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.color = Color.white;                            
+                        }
+                    }
+                    break;
+                case 1:
+                    
+                    break;
+                case 2:
+                    bgTopText.color = Color.green;
+                    break;
+                case 3:
+                    bgTopText.color = Color.blue;
+                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.VIDEO_BAG).ToString();
+                    break;
+                case 4:
+                    bgTopText.color = Color.blue;
+                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.VIDEO_BAG).ToString();
+                    break;
+                case 5:
+                    bgTopText.color = Color.red;
+                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
+                    for(int j = 0; j < bossKnife_1_Container.CustomsItems.Count; j++)
+                    {
+                        panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.sprite = bossKnife_1_Container.CustomsItems[j].CustomSprites;
+                        if(PlayerPrefs.GetInt(Constants.BOSS_BAG) > j)
+                        {
+                            panelScript.buttonsImg[j].gameObject.GetComponent<BtnScript>().knifeImg.color = Color.white;
+                            panelScript.buttonsImg[j].gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    break;
+                case 6:
+                    bgTopText.color = Color.red;
+                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
+                    break;
+                case 7:
+                    bgTopText.color = Color.cyan;
+                    break;
+                case 8:
+                    bgTopText.color = Color.cyan;
+                    break;
+                case 9:
+                    bgTopText.color = Color.gray;
+                    break;
+            }
             if (i == 0) continue;
 
             var tmpX = instPans[i - 1].transform.localPosition.x + panPrefab.GetComponent<RectTransform>().sizeDelta.x/2 + panSpace;
@@ -122,25 +180,29 @@ public class BrainScrolling : MonoBehaviour
             packsBag.SetActive(selectedPanID > 8);
             switch (selectedPanID){
                 case 0:
-                    bgTopText.color = Color.green;
+                    bgTopText.color = Color.green;                    
                     break;
                 case 1:
-                    bgTopText.color = Color.green;
+                    bgTopText.color = Color.green;                    
                     break;
                 case 2:
-                    bgTopText.color = Color.green;
+                    bgTopText.color = Color.green;                    
                     break;
                 case 3:
                     bgTopText.color = Color.blue;
+                    videoBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.VIDEO_BAG).ToString();
                     break;
                 case 4:
                     bgTopText.color = Color.blue;
+                    videoBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.VIDEO_BAG).ToString();
                     break;
                 case 5:
                     bgTopText.color = Color.red;
+                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
                     break;
                 case 6:
                     bgTopText.color = Color.red;
+                    bossBagKnifeNumber.text = PlayerPrefs.GetInt(Constants.BOSS_BAG).ToString();
                     break;
                 case 7:
                     bgTopText.color = Color.cyan;

@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92f772eddfc7c1d4288042cc7fed04d0, type: 3}
-  m_Name: Data2
+  m_Name: Bosss_2
   m_EditorClassIdentifier: 
-  _customSkinType: 0
-  _customSprites: {fileID: 0}
+  _customSprites: {fileID: 21300000, guid: 8f3bee35a52e49a4e93da16f875aa48c, type: 3}
   _customSubscribe: 
   _customNames: 
   _customSubscribeEN: 
   _customNamesEN: 
-  _customPrices: 
+  _customPrices: 0

@@ -1467,6 +1467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 61557180}
+  - component: {fileID: 61557181}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1495,6 +1496,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &61557181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61557179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d666e776f6b770458439ebe941f3281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knifeImg: {fileID: 301312824}
 --- !u!1 &67534890
 GameObject:
   m_ObjectHideFlags: 0
@@ -8298,6 +8312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 425259830}
+  - component: {fileID: 425259831}
   m_Layer: 5
   m_Name: KnifesMenu
   m_TagString: Untagged
@@ -8326,6 +8341,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &425259831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425259829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12adf4074d0b8743bdfe007b177ce82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knifeImg: {fileID: 1026278587}
+  data: {fileID: 11400000, guid: 36f36916b18d0d340a1476a37b3b0f57, type: 2}
 --- !u!1 &426146508
 GameObject:
   m_ObjectHideFlags: 0
@@ -9031,6 +9060,7 @@ GameObject:
   - component: {fileID: 456818760}
   - component: {fileID: 456818759}
   - component: {fileID: 456818758}
+  - component: {fileID: 456818761}
   m_Layer: 5
   m_Name: UnlockNowBtn
   m_TagString: Untagged
@@ -9154,6 +9184,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456818756}
   m_CullTransparentMesh: 1
+--- !u!114 &456818761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456818756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f86fb79f9cd6f43af17bed9b407f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knifeCost: {fileID: 879794305}
 --- !u!1 &464069902
 GameObject:
   m_ObjectHideFlags: 0
@@ -16640,7 +16683,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 500
+  m_text: 1000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -19178,6 +19221,7 @@ MonoBehaviour:
   startPoint: {fileID: 1670306715}
   stageController: {fileID: 22701924}
   matchData: {fileID: 11400000, guid: 74b1b7c04ef314840842cefd98d4efc8, type: 2}
+  userData: {fileID: 11400000, guid: 36f36916b18d0d340a1476a37b3b0f57, type: 2}
   gameOverWindow: {fileID: 2099956880}
   gamePlayWindow: {fileID: 1032752195}
   knifeRG: []
@@ -22728,7 +22772,7 @@ GameObject:
   - component: {fileID: 1205980051}
   - component: {fileID: 1205980050}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AppleNumberValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24063,7 +24107,6 @@ MonoBehaviour:
   scaleOffset: 1.6
   panPrefab: {fileID: 350754387416973950, guid: ba5351d8dfabae6469c767c77229d5a8, type: 3}
   customSystem: {fileID: 590640267}
-  bayBtnText: {fileID: 0}
   subscribeText: {fileID: 871879250}
   rings:
   - {fileID: 1880083328}
@@ -24085,6 +24128,10 @@ MonoBehaviour:
   isScrolling: 0
   buyBtnTitle: BUY
   scrollRect: {fileID: 1894937362}
+  bossBagKnifeNumber: {fileID: 1410560211}
+  videoBagKnifeNumber: {fileID: 1364811229}
+  bossKnife_1_Container: {fileID: 11400000, guid: 00b42e9e1b8f93a48835864716cc112e, type: 2}
+  appleKnife_1_Container: {fileID: 11400000, guid: 98dec5bd8dccd0b4fa4eafc3a8c2652c, type: 2}
 --- !u!1 &1302439323
 GameObject:
   m_ObjectHideFlags: 0
@@ -26552,6 +26599,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textForSmoulBtn: {fileID: 3894872527288464307, guid: ab45f4cbcd32a694c8b1d9bd38e3c324, type: 3}
   textForBigBtn: {fileID: 1816536545402678530, guid: 6ccc2f3c521505b4aa110ff72b68afaa, type: 3}
+  knifesMenu: {fileID: 425259831}
+  mainMenu: {fileID: 61557181}
   data: {fileID: 11400000, guid: 36f36916b18d0d340a1476a37b3b0f57, type: 2}
   GetBtn: {fileID: 456818756}
 --- !u!1 &1427813459
@@ -31472,6 +31521,18 @@ MonoBehaviour:
           m_StringArgument: GamePlay
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 994177563}
+        m_TargetAssemblyTypeName: GamePlaySystem, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1734110151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33578,7 +33639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1878617233
 RectTransform:
   m_ObjectHideFlags: 0

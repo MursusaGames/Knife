@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "Data/StageInfo")]
 public class StageInfo : ScriptableObject

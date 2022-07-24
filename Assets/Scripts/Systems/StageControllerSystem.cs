@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -112,6 +111,7 @@ public class StageControllerSystem : MonoBehaviour
         if (currentLevel == maxLevel)
         {
             currentStage++;
+            PlayerPrefs.SetInt(Constants.BOSS_BAG,currentStage);
             PlayerPrefs.SetInt(Constants.STAGE, currentStage);
             matchData.level = 0;
             matchData.tryCount = 0;

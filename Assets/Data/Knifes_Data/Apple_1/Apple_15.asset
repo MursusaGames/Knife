@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b15f18d06a574934dbfc7b0c11b20989, type: 3}
-  m_Name: CustomDataContainer
+  m_Script: {fileID: 11500000, guid: 92f772eddfc7c1d4288042cc7fed04d0, type: 3}
+  m_Name: Apple_15
   m_EditorClassIdentifier: 
-  _customsItems:
-  - {fileID: 11400000, guid: 6b62d5c412447bf468806e9a100ec811, type: 2}
-  - {fileID: 11400000, guid: 6d1bbe0bd5abb8445a7022b093768a76, type: 2}
+  _customSprites: {fileID: 21300000, guid: d1d8da29c1361724b89c0b6e087615f1, type: 3}
+  _customSubscribe: 
+  _customNames: 
+  _customSubscribeEN: 
+  _customNamesEN: 
+  _customPrices: 0

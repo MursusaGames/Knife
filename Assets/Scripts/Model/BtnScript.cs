@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BtnScript : MonoBehaviour
 {
@@ -8,8 +7,8 @@ public class BtnScript : MonoBehaviour
     public int id;
     private GetForAppleSystem getForAppleSystem;
     private GetForVideoSystem getForVideoSystem;
-
-    private void Start()
+    public Image knifeImg;
+    private void Awake()
     {
         getForAppleSystem = FindObjectOfType<GetForAppleSystem>();
         getForVideoSystem = FindObjectOfType<GetForVideoSystem>();
@@ -17,8 +16,22 @@ public class BtnScript : MonoBehaviour
 
     public void ClickBtn()
     {
-        if(parentId < 3) getForAppleSystem.SetKnife(this);
-        if (parentId > 2 && parentId < 5) getForVideoSystem.SetKnife(this);
-
+        if(parentId < 3)
+        {
+            if (knifeImg.color != Color.white) getForAppleSystem.SetKnife(this);
+            else
+            {
+                getForAppleSystem.data.currentKnife = knifeImg.sprite;
+                getForAppleSystem.knifesMenu.UpgradeKnifeImage();
+                getForAppleSystem.mainMenu.knifeImg.sprite = knifeImg.sprite;
+            }
+                
+        }
+            
+        if (parentId > 2 && parentId < 5)
+        {
+            if(knifeImg.color != Color.white) getForVideoSystem.SetKnife(this);
+            else getForAppleSystem.data.currentKnife = knifeImg.sprite;
+        }
     }
 }

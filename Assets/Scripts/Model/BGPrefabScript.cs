@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BGPrefabScript : MonoBehaviour
 {
-    [SerializeField] List<Image> buttonsImg;
+    public List<Image> buttonsImg;
     public int id;
     private int _id;
     void Start()

@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GamePlaySystem : MonoBehaviour
 {
@@ -10,6 +10,7 @@ public class GamePlaySystem : MonoBehaviour
     [SerializeField] Transform startPoint;
     [SerializeField] StageControllerSystem stageController;
     public MatchData matchData;
+    [SerializeField] private UserData userData;
     [SerializeField] GameObject gameOverWindow;
     [SerializeField] GameObject gamePlayWindow;
     List<GameObject> knifesInGame = new List<GameObject>();
@@ -17,10 +18,10 @@ public class GamePlaySystem : MonoBehaviour
     List<BoxCollider2D> knifeCol = new List<BoxCollider2D>();
     int tryCount = 0;
     bool stopSpawn;
-    void Start()
+    public void StartGame()
     {
         CreateKnife();
-        matchData.numberOffKnifes = 0;
+        matchData.numberOffKnifes = 0;        
     }
 
     public void CreateKnife()
@@ -28,6 +29,7 @@ public class GamePlaySystem : MonoBehaviour
         if (!stopSpawn)
         {
             var _knife = Instantiate(knife, startPoint.position, Quaternion.identity, knifeParent);
+            _knife.GetComponent<Image>().sprite = userData.currentKnife;
             knifesInGame.Add(_knife);
             knifeRG.Add(_knife.GetComponent<Rigidbody2D>());
             knifeCol.Add(_knife.GetComponent<BoxCollider2D>());
